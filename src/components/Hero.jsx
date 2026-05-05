@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import profile from "../assets/profile.png";
-import resumePdf from "../assets/Jitin Kumar chak Resume.pdf";
+import resumePdf from "../assets/Jitin kumar chak_27_04_26.pdf";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
 const MotionDiv = motion.div;
