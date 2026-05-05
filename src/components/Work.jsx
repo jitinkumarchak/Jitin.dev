@@ -3,64 +3,103 @@ import campusverseImg from "../assets/Campusverse.png";
 import hmssImg from "../assets/HMSS.png";
 import streamverseImg from "../assets/StreamVerse.png";
 
+const MotionDiv = motion.div;
+
 const projects = [
   {
     title: "CampusVerse",
+    emoji: "🎓",
+    tagline: "The super-app for college life",
     description:
-      "A scalable student platform with chat, clubs, events, blogs, internships, and leaderboards. Built and launched as a real product for real students.",
+      "Built a full student super-app from scratch — chat, clubs, events, blogs, internships, leaderboards. Designed, developed, and shipped it as a real product used by real students. Yes, I wore all the hats.",
     tech: ["React", "Redux", "Node.js", "Supabase", "Tailwind CSS"],
     image: campusverseImg,
     demo: "https://campusverse.co.in",
+    accent: "#a855f7",
   },
   {
     title: "Hospital Management System",
+    emoji: "🏥",
+    tagline: "RESTful order in a chaotic world",
     description:
-      "Designed REST APIs for patients, appointments, billing, and staff management with secure role-based access for doctors, staff, and admins.",
+      "Designed and built a full REST API suite for patients, appointments, billing, and staff with role-based access control for doctors, admins, and staff. Healthcare-grade reliability — no drama.",
     tech: ["Node.js", "Express.js", "MongoDB"],
     image: hmssImg,
     demo: null,
+    accent: "#10b981",
   },
   {
     title: "StreamVerse",
+    emoji: "🎬",
+    tagline: "Movies & TV — actually fun to browse",
     description:
-      "Modern movie and TV streaming discovery app with search, filtering, trailers, trending content, and responsive UI.",
+      "A modern movie and TV discovery app with real-time search, smart filtering, trailers, and trending content. Because browsing for movies should be as good as watching them.",
     tech: ["React", "Vite", "Tailwind CSS", "TMDB API"],
     image: streamverseImg,
     demo: "https://streamverse-one.vercel.app/",
+    accent: "#f59e0b",
   },
 ];
 
 export default function Work() {
   return (
-    <section id="work" className="px-6 md:px-12 py-20 md:py-28 bg-white">
+    <section id="work" className="px-6 md:px-12 py-24 md:py-32 bg-[#09090b]">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 md:mb-16">
-          Selected Work
-        </h2>
+        {/* Section header */}
+        <div className="mb-16">
+          <p className="text-[#a855f7] text-sm font-semibold tracking-widest uppercase mb-3">
+            Portfolio
+          </p>
+          <h2 className="font-display text-4xl md:text-5xl font-bold">
+            Things I&apos;ve Shipped{" "}
+            <span className="gradient-text">🚀</span>
+          </h2>
+          <p className="mt-4 text-[#a1a1aa] max-w-lg">
+            Real products. Real users. Real commits at 2 a.m.
+          </p>
+        </div>
 
-        <div className="space-y-20 md:space-y-24">
-          {projects.map((project) => (
-            <motion.div
+        <div className="space-y-24 md:space-y-32">
+          {projects.map((project, idx) => (
+            <MotionDiv
               key={project.title}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 48 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="grid md:grid-cols-2 gap-10 md:gap-12 items-center"
+              viewport={{ once: true, margin: "-80px" }}
+              className={`grid md:grid-cols-2 gap-10 md:gap-16 items-center ${
+                idx % 2 === 1 ? "md:[&>*:first-child]:order-2" : ""
+              }`}
             >
+              {/* Text */}
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{project.emoji}</span>
+                  <span
+                    className="text-xs font-semibold tracking-widest uppercase px-3 py-1 rounded-full border"
+                    style={{
+                      color: project.accent,
+                      borderColor: project.accent + "44",
+                      background: project.accent + "11",
+                    }}
+                  >
+                    {project.tagline}
+                  </span>
+                </div>
+
+                <h3 className="font-display text-3xl md:text-4xl font-bold">
                   {project.title}
                 </h3>
-                <p className="mt-5 text-gray-600 text-lg">
+
+                <p className="mt-4 text-[#a1a1aa] text-base leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-wrap gap-2">
                   {project.tech.map((item) => (
                     <span
                       key={item}
-                      className="px-4 py-2 bg-gray-100 rounded-full text-sm"
+                      className="badge-sticker"
                     >
                       {item}
                     </span>
@@ -72,25 +111,40 @@ export default function Work() {
                     href={project.demo}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex mt-6 px-6 py-3 rounded-full border border-black text-sm font-medium hover:bg-black hover:text-white transition"
+                    className="inline-flex mt-8 items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white border transition-all"
+                    style={{
+                      borderColor: project.accent + "66",
+                      background: project.accent + "18",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = project.accent;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = project.accent + "18";
+                    }}
                   >
-                    Live Demo
+                    Live Demo ↗
                   </a>
                 ) : (
-                  <p className="mt-6 text-sm text-gray-500">
-                    Demo available on request.
+                  <p className="mt-8 text-sm text-[#52525b] italic">
+                    Demo available on request — DM me.
                   </p>
                 )}
               </div>
 
-              <div className="bg-gray-100 rounded-3xl h-56 sm:h-64 md:h-72 lg:h-80 flex items-center justify-center overflow-hidden">
+              {/* Image */}
+              <div
+                className="glow-card rounded-2xl overflow-hidden border border-[#3f3f46] bg-[#18181b] aspect-video flex items-center justify-center"
+                style={{ "--glow-color": project.accent }}
+              >
                 <img
                   src={project.image}
                   alt={`${project.title} screenshot`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>
