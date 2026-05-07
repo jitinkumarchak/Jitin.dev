@@ -1,41 +1,54 @@
 import { motion } from "framer-motion";
 
-const MotionDiv = motion.div;
+const M = { div: motion.div };
+
+const stats = [
+  { label: "☕ Coffees consumed", value: "∞" },
+  { label: "🐛 Bugs squashed", value: "∞+1" },
+  { label: "🚀 Products shipped", value: "3+" },
+  { label: "😅 3 a.m. commits", value: "many" },
+];
 
 export default function FounderStory() {
   return (
-    <section id="about" className="px-6 md:px-12 py-24 bg-[#09090b]">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-12">
-          <p className="text-[#a855f7] text-sm font-semibold tracking-widest uppercase mb-3">
-            About
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
+    <section
+      id="about"
+      className="relative px-6 md:px-12 py-28 md:py-36"
+      style={{ background: "var(--bg)" }}
+    >
+      <span className="section-num" style={{ top: "2%", left: "-1%", opacity: 0.05 }} aria-hidden="true">06</span>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <div className="mb-14">
+          <p className="section-label">About</p>
+          <h2
+            className="font-display font-black leading-tight tracking-tight"
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)", color: "var(--text)" }}
+          >
             I build because I{" "}
             <span className="gradient-text">actually care.</span>
           </h2>
         </div>
 
-        <MotionDiv
-          initial={{ opacity: 0, y: 32 }}
+        <M.div
+          initial={{ opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: true }}
-          className="space-y-6 text-[#a1a1aa] text-lg leading-relaxed"
+          className="space-y-6 text-lg leading-relaxed"
+          style={{ color: "var(--text-muted)" }}
         >
           <p>
             College taught me algorithms. Real projects taught me{" "}
-            <em className="not-italic font-semibold text-white">
-              everything else
-            </em>
-            . As a student I watched talented people across campuses struggle to
-            find internships, communities, and opportunities — all scattered
-            across dead group chats and random platforms.
+            <em className="not-italic font-bold" style={{ color: "var(--text)" }}>everything else</em>.
+            As a student I watched talented people across campuses struggle to find internships,
+            communities, and opportunities — all scattered across dead group chats and random platforms.
           </p>
 
-          {/* Pull quote */}
-          <blockquote className="border-l-4 border-[#a855f7] pl-6 my-8 text-xl text-white font-medium italic">
+          <blockquote
+            className="pl-6 my-8 text-xl font-bold italic"
+            style={{ borderLeft: "4px solid var(--accent)", color: "var(--text)" }}
+          >
             &ldquo;Why complain about the problem when you can just… build the solution?&rdquo;
           </blockquote>
 
@@ -45,43 +58,39 @@ export default function FounderStory() {
               href="https://campusverse.co.in"
               target="_blank"
               rel="noreferrer"
-              className="text-[#a855f7] font-semibold hover:underline"
+              className="font-bold underline underline-offset-3 decoration-dotted"
+              style={{ color: "var(--accent)" }}
             >
               CampusVerse
             </a>{" "}
-            — designed the UI, built the backend, shipped it, iterated on user
-            feedback, and kept going. Not as a side project. As a real product
-            for real students.
+            — designed the UI, built the backend, shipped it, iterated on user feedback, and kept going.
+            Not as a side project. As a real product for real students.
           </p>
 
           <p>
-            Today I focus on building fast, clean, scalable full-stack products.
-            I care about product thinking, engineering quality, and actual
-            impact. If you need someone who ships — not just someone who{" "}
-            <em className="not-italic font-semibold text-white">talks</em> about
-            shipping — let&apos;s talk.
+            Today I focus on building fast, clean, scalable full-stack products. I care about product
+            thinking, engineering quality, and actual impact. If you need someone who ships — not just
+            someone who <em className="not-italic font-bold" style={{ color: "var(--text)" }}>talks</em>{" "}
+            about shipping — let&apos;s talk.
           </p>
 
-          {/* Fun fact row */}
-          <div className="mt-10 flex flex-wrap gap-4">
-            {[
-              { label: "☕ Coffees consumed", value: "∞" },
-              { label: "🐛 Bugs squashed", value: "∞ + 1" },
-              { label: "🚀 Products shipped", value: "3+" },
-              { label: "😅 3 a.m. commits", value: "many" },
-            ].map((stat) => (
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="bg-[#18181b] border border-[#3f3f46] rounded-xl px-5 py-4 text-center min-w-[120px]"
+                className="card text-center px-4 py-5"
+                style={{ background: "var(--bg-card)" }}
               >
-                <p className="font-display text-2xl font-bold text-white">
+                <p className="font-display text-2xl font-black" style={{ color: "var(--accent)" }}>
                   {stat.value}
                 </p>
-                <p className="text-xs text-[#71717a] mt-1">{stat.label}</p>
+                <p className="text-xs mt-1.5" style={{ color: "var(--text-muted)" }}>
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>
-        </MotionDiv>
+        </M.div>
       </div>
     </section>
   );

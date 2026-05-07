@@ -3,128 +3,183 @@ import profile from "../assets/profile.png";
 import resumePdf from "../assets/Jitin kumar chak_27_04_26.pdf";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
-const MotionDiv = motion.div;
-const MotionH1 = motion.h1;
-const MotionP = motion.p;
+const M = { div: motion.div, h1: motion.h1, p: motion.p, span: motion.span };
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 32 },
+const up = (delay = 0) => ({
+  initial: { opacity: 0, y: 36 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, delay, ease: "easeOut" },
+  transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
 });
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden px-6 md:px-12 pt-20 pb-24 md:pt-28 md:pb-32">
+    <section
+      id="hero"
+      className="relative overflow-hidden px-6 md:px-12 pt-20 pb-28 md:pt-28 md:pb-36 dot-grid"
+    >
       {/* Ambient blobs */}
-      <div
-        className="blob w-96 h-96 bg-purple-600 absolute -top-32 -left-32"
-        style={{ animationDelay: "0s" }}
-      />
-      <div
-        className="blob w-80 h-80 bg-cyan-500 absolute top-20 right-0"
-        style={{ animationDelay: "2s" }}
-      />
-      <div
-        className="blob w-64 h-64 bg-emerald-500 absolute bottom-0 left-1/3"
-        style={{ animationDelay: "4s" }}
-      />
+      <div className="blob w-[500px] h-[500px] absolute -top-40 -left-40"
+        style={{ background: "var(--accent)" }} />
+      <div className="blob w-96 h-96 absolute top-16 right-0"
+        style={{ background: "#06b6d4", animationDelay: "2s" }} />
+      <div className="blob w-72 h-72 absolute bottom-0 left-1/3"
+        style={{ background: "#10b981", animationDelay: "4s" }} />
 
-      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-        {/* Left – copy */}
+      {/* Oversized decorative text */}
+      <span
+        className="section-num select-none pointer-events-none"
+        style={{ top: "10%", right: "-2%", opacity: 0.06 }}
+        aria-hidden="true"
+      >
+        01
+      </span>
+
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
+
+        {/* ── Left – copy ── */}
         <div>
           {/* Status badge */}
-          <MotionDiv {...fadeUp(0)} className="mb-6 inline-flex">
-            <span className="flex items-center gap-2 bg-[#18181b] border border-[#3f3f46] text-xs font-semibold text-[#a1a1aa] px-3 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <M.div {...up(0)} className="mb-7 inline-flex">
+            <span
+              className="flex items-center gap-2.5 px-4 py-2 rounded-full text-xs font-bold tracking-wide"
+              style={{
+                background: "var(--surface)",
+                border: "1px solid var(--border-strong)",
+                color: "var(--accent)",
+              }}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+              </span>
               Available for work
             </span>
-          </MotionDiv>
+          </M.div>
 
-          {/* Heading */}
-          <MotionH1
-            {...fadeUp(0.1)}
-            className="font-display text-5xl sm:text-6xl md:text-7xl font-bold leading-none tracking-tight"
+          {/* Name */}
+          <M.h1
+            {...up(0.1)}
+            className="font-display leading-none tracking-tight"
+            style={{ fontSize: "clamp(3.2rem, 9vw, 6.5rem)", fontWeight: 900 }}
           >
-            <span className="block">Jitin</span>
-            <span className="block">Kumar</span>
+            <span className="block" style={{ color: "var(--text)" }}>Jitin</span>
+            <span className="block" style={{ color: "var(--text)" }}>Kumar</span>
             <span className="block gradient-text">Chak</span>
-          </MotionH1>
+          </M.h1>
 
           {/* Tagline */}
-          <MotionP
-            {...fadeUp(0.25)}
-            className="mt-6 text-[#a1a1aa] text-lg max-w-md leading-relaxed"
-          >
-            Full-Stack Dev & Founder of{" "}
+          <M.p {...up(0.25)} className="mt-6 text-lg max-w-md leading-relaxed" style={{ color: "var(--text-muted)" }}>
+            Full-Stack Dev &amp; Founder of{" "}
             <a
               href="https://campusverse.co.in"
               target="_blank"
               rel="noreferrer"
-              className="text-[#a855f7] hover:underline font-semibold"
+              className="font-bold underline underline-offset-3 decoration-dotted"
+              style={{ color: "var(--accent)" }}
             >
               CampusVerse
             </a>
             . I turn caffeine &amp; code into products real people actually use.
-          </MotionP>
+          </M.p>
 
-          <MotionP
-            {...fadeUp(0.3)}
-            className="mt-3 text-[#52525b] text-sm"
-            title="I'm serious about that asterisk — zero AI vibes, all handcrafted. 🤌"
+          <M.p
+            {...up(0.3)}
+            className="mt-3 text-sm font-mono"
+            style={{ color: "var(--text-faint)" }}
+            title="Zero AI vibes, all handcrafted. 🤌"
           >
             Clean code. Fast ships. No BS.*
-          </MotionP>
+          </M.p>
 
           {/* CTAs */}
-          <MotionDiv {...fadeUp(0.4)} className="mt-10 flex flex-wrap gap-3">
-            <a
-              href="#work"
-              className="bg-[#a855f7] hover:bg-[#9333ea] text-white px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
-            >
+          <M.div {...up(0.4)} className="mt-10 flex flex-wrap gap-3">
+            <a href="#work" id="hero-work-btn" className="btn-primary">
               See my work ✦
             </a>
             <a
               href={resumePdf}
               download
-              className="border border-[#3f3f46] hover:border-[#a855f7] text-[#a1a1aa] hover:text-white px-6 py-3 rounded-full text-sm font-semibold transition-all"
+              id="hero-resume-btn"
+              className="btn-outline"
               title="It's a great read, I promise"
             >
               Download Résumé
             </a>
-          </MotionDiv>
+          </M.div>
 
           {/* Social icons */}
-          <MotionDiv {...fadeUp(0.5)} className="flex gap-3 mt-8">
-            <a
-              href="https://www.linkedin.com/in/jitin-kumar-chak-6b0a071ba/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"
-              className="w-10 h-10 border border-[#3f3f46] rounded-full flex items-center justify-center text-[#a1a1aa] hover:border-[#a855f7] hover:text-[#a855f7] transition-all"
-            >
-              <FaLinkedinIn size={16} />
-            </a>
-            <a
-              href="https://github.com/jitinkumarchak"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub"
-              className="w-10 h-10 border border-[#3f3f46] rounded-full flex items-center justify-center text-[#a1a1aa] hover:border-[#10b981] hover:text-[#10b981] transition-all"
-            >
-              <FaGithub size={16} />
-            </a>
-          </MotionDiv>
+          <M.div {...up(0.5)} className="flex gap-3 mt-8">
+            {[
+              {
+                href: "https://www.linkedin.com/in/jitin-kumar-chak-6b0a071ba/",
+                icon: <FaLinkedinIn size={15} />,
+                label: "LinkedIn",
+                id: "hero-linkedin",
+              },
+              {
+                href: "https://github.com/jitinkumarchak",
+                icon: <FaGithub size={15} />,
+                label: "GitHub",
+                id: "hero-github",
+              },
+            ].map(({ href, icon, label, id }) => (
+              <a
+                key={id}
+                id={id}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200"
+                style={{
+                  border: "1.5px solid var(--border-strong)",
+                  color: "var(--text-muted)",
+                  background: "var(--bg-card)",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = "var(--accent)";
+                  e.currentTarget.style.color = "var(--accent)";
+                  e.currentTarget.style.background = "var(--surface)";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = "var(--border-strong)";
+                  e.currentTarget.style.color = "var(--text-muted)";
+                  e.currentTarget.style.background = "var(--bg-card)";
+                }}
+              >
+                {icon}
+              </a>
+            ))}
+          </M.div>
         </div>
 
-        {/* Right – photo */}
-        <MotionDiv
-          initial={{ opacity: 0, scale: 0.95 }}
+        {/* ── Right – photo ── */}
+        <M.div
+          initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.75, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex justify-center"
         >
-          {/* Rotating badge ring */}
+          {/* Decorative ring */}
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none float-anim"
+            style={{ animationDelay: "0s" }}
+          >
+            <div
+              className="rounded-full"
+              style={{
+                width: "340px",
+                height: "340px",
+                background: `conic-gradient(from 0deg, var(--accent), #06b6d4, #10b981, var(--accent))`,
+                padding: "2px",
+                borderRadius: "9999px",
+                opacity: 0.35,
+                filter: "blur(1px)",
+              }}
+            />
+          </div>
+
+          {/* Rotating text badge */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <svg
               viewBox="0 0 300 300"
@@ -138,8 +193,12 @@ export default function Hero() {
                 />
               </defs>
               <text
-                className="font-display fill-[#a855f7] text-[13px]"
-                style={{ fontSize: 13, fontFamily: "Space Grotesk, sans-serif" }}
+                style={{
+                  fontSize: 12,
+                  fontFamily: "Space Grotesk, sans-serif",
+                  fontWeight: 700,
+                  fill: "var(--accent)",
+                }}
               >
                 <textPath href="#circle-path" spacing="auto">
                   ✦ OPEN TO WORK ✦ HIRE ME ✦ LET&apos;S BUILD ✦ OPEN TO WORK ✦ HIRE ME ✦ LET&apos;S BUILD ✦
@@ -148,16 +207,59 @@ export default function Hero() {
             </svg>
           </div>
 
-          {/* Profile image */}
-          <div className="relative z-10 w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden border-2 border-[#3f3f46] shadow-2xl">
+          {/* Profile photo */}
+          <div
+            className="relative z-10 w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden"
+            style={{
+              border: "3px solid var(--border-strong)",
+              boxShadow: "0 24px 80px var(--accent-glow)",
+            }}
+          >
             <img
               src={profile}
               alt="Jitin Kumar Chak"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               title="👋 Hey there!"
             />
           </div>
-        </MotionDiv>
+
+          {/* Floating mini card */}
+          <M.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="absolute bottom-4 -right-4 md:right-0 card px-4 py-3 flex items-center gap-3 z-20 float-anim"
+            style={{
+              animationDelay: "1.5s",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-strong)",
+            }}
+          >
+            <span className="text-2xl">🚀</span>
+            <div>
+              <p className="text-xs font-bold" style={{ color: "var(--text)" }}>3+ Products</p>
+              <p className="text-xs" style={{ color: "var(--text-muted)" }}>Shipped &amp; Live</p>
+            </div>
+          </M.div>
+
+          <M.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1.0, duration: 0.6 }}
+            className="absolute top-4 -left-4 md:left-0 card px-4 py-3 flex items-center gap-3 z-20 float-anim"
+            style={{
+              animationDelay: "3s",
+              background: "var(--bg-card)",
+              border: "1px solid var(--border-strong)",
+            }}
+          >
+            <span className="text-2xl">☕</span>
+            <div>
+              <p className="text-xs font-bold" style={{ color: "var(--text)" }}>Full-Stack</p>
+              <p className="text-xs" style={{ color: "var(--text-muted)" }}>Dev &amp; Founder</p>
+            </div>
+          </M.div>
+        </M.div>
       </div>
     </section>
   );

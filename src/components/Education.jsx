@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-const MotionDiv = motion.div;
+const M = { div: motion.div };
 
 const educationItems = [
   {
@@ -9,7 +9,7 @@ const educationItems = [
     period: "Oct 2022 – Jun 2026",
     grade: "CGPA: 8.24 / 10",
     emoji: "🎓",
-    color: "#a855f7",
+    color: "#7c3aed",
   },
   {
     school: "Raj Kamal Public School, Sikandra Rao, Hathras",
@@ -23,56 +23,84 @@ const educationItems = [
 
 export default function Education() {
   return (
-    <section id="education" className="px-6 md:px-12 py-24 bg-[#18181b]">
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="education"
+      className="relative px-6 md:px-12 py-28 md:py-36"
+      style={{ background: "var(--bg-alt)" }}
+    >
+      {/* Decorative number */}
+      <span
+        className="section-num"
+        style={{ top: "2%", right: "-1%", opacity: 0.06 }}
+        aria-hidden="true"
+      >
+        05
+      </span>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
+
         {/* Header */}
-        <div className="mb-12">
-          <p className="text-[#a855f7] text-sm font-semibold tracking-widest uppercase mb-3">
-            Education
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold">
-            Where I Levelled Up
+        <div className="mb-14">
+          <p className="section-label">Education</p>
+          <h2
+            className="font-display font-black leading-none tracking-tight"
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)", color: "var(--text)" }}
+          >
+            Where I{" "}
+            <span className="gradient-text">Levelled Up</span>
           </h2>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {educationItems.map((item, i) => (
-            <MotionDiv
+            <M.div
               key={item.school}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="glow-card border border-[#3f3f46] bg-[#27272a] rounded-2xl p-6 flex gap-5 items-start"
+              className="card p-6 flex gap-5 items-start"
             >
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl flex-shrink-0"
-                style={{ background: item.color + "18", border: `1px solid ${item.color}40` }}
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                style={{
+                  background: item.color + "14",
+                  border: `1px solid ${item.color}35`,
+                }}
               >
                 {item.emoji}
               </div>
 
               <div className="flex-1 min-w-0">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-1">
-                  <h3 className="font-display text-lg font-bold leading-snug">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+                  <h3
+                    className="font-display font-bold text-lg leading-snug"
+                    style={{ color: "var(--text)" }}
+                  >
                     {item.school}
                   </h3>
                   <span
-                    className="text-xs font-semibold px-3 py-1 rounded-full flex-shrink-0 self-start"
-                    style={{ color: item.color, background: item.color + "18", border: `1px solid ${item.color}40` }}
+                    className="text-xs font-bold px-3 py-1.5 rounded-full flex-shrink-0 self-start"
+                    style={{
+                      color: item.color,
+                      background: item.color + "14",
+                      border: `1px solid ${item.color}35`,
+                    }}
                   >
                     {item.period}
                   </span>
                 </div>
-                <p className="text-[#a1a1aa] text-sm mt-1">{item.degree}</p>
+                <p className="text-sm mt-1.5" style={{ color: "var(--text-muted)" }}>
+                  {item.degree}
+                </p>
                 <p
-                  className="text-sm font-semibold mt-2"
+                  className="text-sm font-bold mt-1.5"
                   style={{ color: item.color }}
                 >
                   {item.grade}
                 </p>
               </div>
-            </MotionDiv>
+            </M.div>
           ))}
         </div>
       </div>

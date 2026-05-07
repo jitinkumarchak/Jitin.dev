@@ -1,58 +1,81 @@
 import { motion } from "framer-motion";
-
-const MotionDiv = motion.div;
 import { skills } from "../data/skills";
 
+const M = { div: motion.div };
+
 const CATEGORY_STYLES = {
-  languages: { emoji: "📝", color: "#a855f7", label: "Languages" },
-  frontend: { emoji: "🎨", color: "#06b6d4", label: "Frontend" },
-  backend: { emoji: "⚙️", color: "#10b981", label: "Backend" },
-  databases: { emoji: "🗄️", color: "#f59e0b", label: "Databases" },
-  tools: { emoji: "🛠️", color: "#f97316", label: "Tools" },
-  "soft skills": { emoji: "🧠", color: "#ec4899", label: "Soft Skills" },
+  languages:    { emoji: "📝", color: "#7c3aed", label: "Languages" },
+  frontend:     { emoji: "🎨", color: "#06b6d4", label: "Frontend" },
+  backend:      { emoji: "⚙️", color: "#10b981", label: "Backend" },
+  databases:    { emoji: "🗄️", color: "#f59e0b", label: "Databases" },
+  tools:        { emoji: "🛠️", color: "#f97316", label: "Tools" },
+  "soft skills":{ emoji: "🧠", color: "#ec4899", label: "Soft Skills" },
 };
 
 export default function Skills() {
   return (
-    <section id="skills" className="px-6 md:px-12 py-24 bg-[#18181b]">
-      <div className="max-w-6xl mx-auto">
+    <section
+      id="skills"
+      className="relative px-6 md:px-12 py-28 md:py-36"
+      style={{ background: "var(--bg)" }}
+    >
+      {/* Decorative number */}
+      <span
+        className="section-num"
+        style={{ top: "2%", left: "-1%", opacity: 0.05 }}
+        aria-hidden="true"
+      >
+        04
+      </span>
+
+      <div className="relative z-10 max-w-6xl mx-auto">
+
         {/* Header */}
-        <div className="mb-12">
-          <p className="text-[#a855f7] text-sm font-semibold tracking-widest uppercase mb-3">
-            Skills
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold">
+        <div className="mb-14">
+          <p className="section-label">Skills</p>
+          <h2
+            className="font-display font-black leading-none tracking-tight"
+            style={{ fontSize: "clamp(2.4rem, 6vw, 4rem)", color: "var(--text)" }}
+          >
             My Arsenal{" "}
             <span className="gradient-text">⚡</span>
           </h2>
-          <p className="mt-4 text-[#a1a1aa]">
+          <p className="mt-4" style={{ color: "var(--text-muted)" }}>
             Tools I reach for when the blank editor is staring back at me.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {Object.entries(skills).map(([group, items], i) => {
             const meta = CATEGORY_STYLES[group] || {
               emoji: "✦",
-              color: "#a855f7",
+              color: "var(--accent)",
               label: group,
             };
 
             return (
-              <MotionDiv
+              <M.div
                 key={group}
                 initial={{ opacity: 0, y: 32 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
                 viewport={{ once: true, margin: "-60px" }}
-                className="glow-card bg-[#27272a] border border-[#3f3f46] rounded-2xl p-6 hover:border-opacity-60"
-                style={{ "--glow-color": meta.color }}
+                className="card p-6 group"
+                style={{ background: "var(--bg-card)" }}
               >
                 {/* Category header */}
-                <div className="flex items-center gap-2 mb-5">
-                  <span className="text-2xl">{meta.emoji}</span>
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                    style={{
+                      background: meta.color + "14",
+                      border: `1px solid ${meta.color}30`,
+                    }}
+                  >
+                    {meta.emoji}
+                  </div>
                   <h3
-                    className="text-sm font-bold uppercase tracking-wider"
+                    className="text-sm font-extrabold uppercase tracking-widest"
                     style={{ color: meta.color }}
                   >
                     {meta.label}
@@ -64,26 +87,28 @@ export default function Skills() {
                   {items.map((s) => (
                     <span
                       key={s}
-                      className="px-3 py-1 rounded-full text-xs font-semibold border transition-all duration-200 cursor-default"
+                      className="px-3 py-1 rounded-full text-xs font-bold border transition-all duration-200 cursor-default"
                       style={{
                         color: meta.color,
-                        borderColor: meta.color + "40",
-                        background: meta.color + "12",
+                        borderColor: meta.color + "35",
+                        background: meta.color + "0e",
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = meta.color + "28";
-                        e.currentTarget.style.transform = "scale(1.06)";
+                        e.currentTarget.style.background = meta.color + "25";
+                        e.currentTarget.style.transform = "scale(1.07)";
+                        e.currentTarget.style.borderColor = meta.color + "70";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.background = meta.color + "12";
+                        e.currentTarget.style.background = meta.color + "0e";
                         e.currentTarget.style.transform = "scale(1)";
+                        e.currentTarget.style.borderColor = meta.color + "35";
                       }}
                     >
                       {s}
                     </span>
                   ))}
                 </div>
-              </MotionDiv>
+              </M.div>
             );
           })}
         </div>

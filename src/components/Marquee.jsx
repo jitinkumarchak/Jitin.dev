@@ -14,19 +14,24 @@ const ITEMS = [
 ];
 
 export default function Marquee() {
-  /* Duplicate the list so the animation loops seamlessly */
   const doubled = [...ITEMS, ...ITEMS];
 
   return (
     <div
-      className="w-full overflow-hidden border-y border-[#3f3f46] bg-[#18181b] py-4"
+      className="w-full overflow-hidden py-4"
+      style={{
+        borderTop: "1px solid var(--border)",
+        borderBottom: "1px solid var(--border)",
+        background: "var(--bg-alt)",
+      }}
       aria-hidden="true"
     >
       <div className="marquee-inner whitespace-nowrap">
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="inline-block mx-8 text-sm font-semibold text-[#a1a1aa] tracking-wide"
+            className="inline-flex items-center mx-8 text-xs font-bold tracking-widest uppercase"
+            style={{ color: i % 3 === 0 ? "var(--accent)" : "var(--text-muted)" }}
           >
             {item}
           </span>

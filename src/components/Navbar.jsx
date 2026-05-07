@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { useState, useEffect } from "react";
+import { FiMenu, FiX, FiSun, FiMoon } from "react-icons/fi";
 
 const NAV_LINKS = [
   { href: "#work", label: "Work" },
@@ -9,64 +9,115 @@ const NAV_LINKS = [
   { href: "#about", label: "About" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ dark, onToggle }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#3f3f46] bg-[#09090b]/80 backdrop-blur-md">
+    <header
+      className="sticky top-0 z-50 w-full theme-transition"
+      style={{
+        background: scrolled ? "var(--bg)" : "transparent",
+        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+      }}
+    >
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between">
+
         {/* Logo */}
         <a
           href="#"
-          className="font-display font-bold text-xl tracking-tight"
+          className="font-display font-extrabold text-xl tracking-tight"
+          style={{ color: "var(--text)" }}
           aria-label="Jitin home"
         >
           jitin
-          <span className="text-[#a855f7]">.</span>
-          <span className="text-[#10b981]">dev</span>
+          <span style={{ color: "var(--accent)" }}>.</span>
+          <span
+            className="px-1 py-0.5 rounded-md text-white text-base"
+            style={{ background: "var(--accent)", marginLeft: 1 }}
+          >
+            dev
+          </span>
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#a1a1aa]">
+        <nav className="hidden md:flex items-center gap-7 text-sm font-semibold">
           {NAV_LINKS.map(({ href, label }) => (
             <a
               key={href}
               href={href}
-              className="hover:text-white transition-colors duration-200 relative group"
+              className="relative group"
+              style={{ color: "var(--text-muted)" }}
+              onMouseEnter={e => e.currentTarget.style.color = "var(--accent)"}
+              onMouseLeave={e => e.currentTarget.style.color = "var(--text-muted)"}
             >
               {label}
-              <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#a855f7] transition-all duration-300 group-hover:w-full" />
+              <span
+                className="absolute -bottom-0.5 left-0 h-[2px] w-0 rounded-full transition-all duration-300 group-hover:w-full"
+                style={{ background: "var(--accent)" }}
+              />
             </a>
           ))}
         </nav>
 
-        {/* CTA */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-1.5 bg-[#a855f7] hover:bg-[#9333ea] text-white px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 shadow-lg shadow-purple-500/20"
-          title="I don't bite — promise 😄"
-        >
-          Hire me 🚀
-        </a>
+        {/* Right controls */}
+        <div className="flex items-center gap-3">
+          {/* Dark mode toggle */}
+          <button
+            onClick={onToggle}
+            id="theme-toggle"
+            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+            className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border)",
+              color: "var(--accent)",
+            }}
+          >
+            {dark ? <FiSun size={16} /> : <FiMoon size={16} />}
+          </button>
 
-        {/* Mobile menu toggle */}
-        <button
-          className="md:hidden text-[#a1a1aa] hover:text-white"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Close menu" : "Open menu"}
-        >
-          {open ? <FiX size={22} /> : <FiMenu size={22} />}
-        </button>
+          {/* CTA */}
+          <a
+            href="#contact"
+            id="navbar-hire-btn"
+            className="hidden md:inline-flex btn-primary text-sm"
+          >
+            Hire me 🚀
+          </a>
+
+          {/* Mobile toggle */}
+          <button
+            className="md:hidden w-9 h-9 rounded-full flex items-center justify-center"
+            style={{ background: "var(--surface)", border: "1px solid var(--border)", color: "var(--text)" }}
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+          >
+            {open ? <FiX size={18} /> : <FiMenu size={18} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile dropdown */}
       {open && (
-        <div className="md:hidden border-t border-[#3f3f46] bg-[#18181b] px-6 py-4 flex flex-col gap-4">
+        <div
+          className="md:hidden px-6 py-5 flex flex-col gap-4"
+          style={{ background: "var(--bg-alt)", borderTop: "1px solid var(--border)" }}
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <a
               key={href}
               href={href}
-              className="text-sm font-medium text-[#a1a1aa] hover:text-white transition-colors"
+              className="text-sm font-semibold transition-colors"
+              style={{ color: "var(--text-muted)" }}
               onClick={() => setOpen(false)}
             >
               {label}
@@ -75,7 +126,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="inline-flex items-center justify-center gap-1.5 bg-[#a855f7] text-white px-5 py-2.5 rounded-full text-sm font-semibold mt-2"
+            className="btn-primary justify-center mt-1"
           >
             Hire me 🚀
           </a>
