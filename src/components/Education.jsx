@@ -7,7 +7,7 @@ const educationItems = [
     school: "IK Gujral Punjab Technical University, Kapurthala",
     degree: "B.Tech in Computer Science",
     period: "Oct 2022 – Jun 2026",
-    grade: "CGPA: 8.24 / 10",
+    grade: "CGPA: 8.33/ 10",
     emoji: "🎓",
     color: "#7c3aed",
   },
