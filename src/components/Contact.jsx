@@ -44,7 +44,7 @@ export default function Contact() {
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <a
-            href="mailto:jitin42013@gmail.com"
+            href="mailto:jitinkumarchak@gmail.com"
             className="flex items-center gap-2 bg-[#a855f7] hover:bg-[#9333ea] text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-xl shadow-purple-500/25 hover:shadow-purple-500/40 hover:-translate-y-0.5"
           >
             <HiOutlineMail size={18} />
@@ -52,7 +52,7 @@ export default function Contact() {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/jitin-kumar-chak-6b0a071ba/"
+            href="https://www.linkedin.com/in/jitin-kumar-chak"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 border border-[#3f3f46] hover:border-[#a855f7] text-[#a1a1aa] hover:text-white px-8 py-4 rounded-full text-base font-semibold transition-all hover:-translate-y-0.5"
