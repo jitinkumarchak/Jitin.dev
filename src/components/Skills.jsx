@@ -12,6 +12,13 @@ const CATEGORY_STYLES = {
   "soft skills":{ emoji: "🧠", color: "#ec4899", label: "Soft Skills" },
 };
 
+const LEVEL_COLORS = {
+  Expert: { bg: "bg-green-500", text: "text-green-600" },
+  Advanced: { bg: "bg-blue-500", text: "text-blue-600" },
+  Intermediate: { bg: "bg-yellow-500", text: "text-yellow-600" },
+  Beginner: { bg: "bg-gray-500", text: "text-gray-600" },
+};
+
 export default function Skills() {
   return (
     <section
@@ -84,29 +91,54 @@ export default function Skills() {
 
                 {/* Skill badges */}
                 <div className="flex flex-wrap gap-2">
-                  {items.map((s) => (
-                    <span
-                      key={s}
-                      className="px-3 py-1 rounded-full text-xs font-bold border transition-all duration-200 cursor-default"
-                      style={{
-                        color: meta.color,
-                        borderColor: meta.color + "35",
-                        background: meta.color + "0e",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = meta.color + "25";
-                        e.currentTarget.style.transform = "scale(1.07)";
-                        e.currentTarget.style.borderColor = meta.color + "70";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = meta.color + "0e";
-                        e.currentTarget.style.transform = "scale(1)";
-                        e.currentTarget.style.borderColor = meta.color + "35";
-                      }}
-                    >
-                      {s}
-                    </span>
-                  ))}
+                  {items.map((skill) => {
+                    // Handle both old string format and new object format
+                    const skillName = typeof skill === "string" ? skill : skill.name;
+                    const skillLevel = typeof skill === "string" ? "Intermediate" : skill.level;
+                    const levelColor = LEVEL_COLORS[skillLevel] || LEVEL_COLORS["Intermediate"];
+
+                    return (
+                      <div
+                        key={skillName}
+                        className="group/skill"
+                        title={skillLevel}
+                      >
+                        <span
+                          className="px-3 py-1 rounded-full text-xs font-bold border transition-all duration-200 cursor-default flex items-center gap-1.5"
+                          style={{
+                            color: meta.color,
+                            borderColor: meta.color + "35",
+                            background: meta.color + "0e",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = meta.color + "25";
+                            e.currentTarget.style.transform = "scale(1.07)";
+                            e.currentTarget.style.borderColor = meta.color + "70";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = meta.color + "0e";
+                            e.currentTarget.style.transform = "scale(1)";
+                            e.currentTarget.style.borderColor = meta.color + "35";
+                          }}
+                        >
+                          {skillName}
+                          <span
+                            className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                            style={{
+                              background: levelColor.bg.replace("bg-", ""),
+                            }}
+                          />
+                        </span>
+                        {/* Level tooltip */}
+                        <div
+                          className="opacity-0 group-hover/skill:opacity-100 transition-opacity text-xs px-2 py-1 rounded bg-gray-800 text-white absolute -top-6 left-0 whitespace-nowrap pointer-events-none"
+                          style={{ color: "white" }}
+                        >
+                          {skillLevel}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </M.div>
             );

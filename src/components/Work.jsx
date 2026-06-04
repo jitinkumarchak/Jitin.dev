@@ -12,23 +12,27 @@ const projects = [
     emoji: "🎓",
     tagline: "The super-app for college life",
     description:
-      "Built a full student super-app from scratch — chat, clubs, events, blogs, internships, leaderboards. Designed, developed, and shipped it as a real product used by real students. Yes, I wore all the hats.",
+      "Built a full student super-app from scratch — 90+ active users, real product with chat, clubs, events, blogs, internships, leaderboards. Designed UI, built backend APIs, managed 3-person team. Shipped MVP in 3 months.",
     tech: ["React", "Redux", "Node.js", "Supabase", "Tailwind CSS"],
     image: campusverseImg,
     demo: "https://campusverse.co.in",
+    github: "https://github.com/jitinkumarchak/CampusVerseV1",
     accent: "#7c3aed",
+    metrics: "90+ active users | 3-person team | Live product",
   },
   {
     num: "02",
-    title: "Hospital Management System",
+    title: "PulseNet",
     emoji: "🏥",
-    tagline: "RESTful order in a chaotic world",
+    tagline: "Emergency resource availability platform",
     description:
-      "Designed and built a full REST API suite for patients, appointments, billing, and staff with role-based access control for doctors, admins, and staff. Healthcare-grade reliability — no drama.",
-    tech: ["Node.js", "Express.js", "MongoDB"],
+      "Real-time hospital resource tracking system. Monitors beds, doctors, ambulances, and critical resources. Built full REST API suite with role-based access control for admins, hospital staff, and emergency responders. Healthcare-grade reliability.",
+    tech: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
     image: hmssImg,
-    demo: null,
+    demo: "https://github.com/jitinkumarchak/PulseNet",
+    github: "https://github.com/jitinkumarchak/PulseNet",
     accent: "#10b981",
+    metrics: "Healthcare-grade | Real-time tracking",
   },
   {
     num: "03",
@@ -36,11 +40,13 @@ const projects = [
     emoji: "🎬",
     tagline: "Movies & TV — actually fun to browse",
     description:
-      "A modern movie and TV discovery app with real-time search, smart filtering, trailers, and trending content. Because browsing for movies should be as good as watching them.",
+      "Modern movie and TV discovery app with real-time search, smart filtering, trailers, and trending content. Integrated TMDB API for comprehensive data. Responsive UI with smooth animations.",
     tech: ["React", "Vite", "Tailwind CSS", "TMDB API"],
     image: streamverseImg,
     demo: "https://streamverse-one.vercel.app/",
+    github: "https://github.com/jitinkumarchak/StreamVerse",
     accent: "#f59e0b",
+    metrics: "Live demo",
   },
 ];
 
@@ -123,6 +129,13 @@ export default function Work() {
                   {project.description}
                 </p>
 
+                {/* Metrics badge */}
+                {project.metrics && (
+                  <p className="mt-3 text-xs font-mono" style={{ color: project.accent }}>
+                    📊 {project.metrics}
+                  </p>
+                )}
+
                 {/* Tech stack */}
                 <div className="mt-6 flex flex-wrap gap-2">
                   {project.tech.map((item) => (
@@ -133,34 +146,55 @@ export default function Work() {
                 </div>
 
                 {/* CTA */}
-                {project.demo ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    id={`work-demo-${project.num}`}
-                    className="inline-flex mt-8 items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-200"
-                    style={{
-                      color: project.accent,
-                      border: `1.5px solid ${project.accent}60`,
-                      background: project.accent + "10",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = project.accent;
-                      e.currentTarget.style.color = "#fff";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = project.accent + "10";
-                      e.currentTarget.style.color = project.accent;
-                    }}
-                  >
-                    Live Demo ↗
-                  </a>
-                ) : (
-                  <p className="mt-8 text-sm italic" style={{ color: "var(--text-faint)" }}>
-                    Demo available on request — DM me.
-                  </p>
-                )}
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {project.demo ? (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      id={`work-demo-${project.num}`}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-200"
+                      style={{
+                        color: project.accent,
+                        border: `1.5px solid ${project.accent}60`,
+                        background: project.accent + "10",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = project.accent;
+                        e.currentTarget.style.color = "#fff";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = project.accent + "10";
+                        e.currentTarget.style.color = project.accent;
+                      }}
+                    >
+                      {project.demo.includes("github") ? "View Code" : "Live Demo"} ↗
+                    </a>
+                  ) : null}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-bold transition-all duration-200"
+                      style={{
+                        color: "var(--text-muted)",
+                        border: "1.5px solid var(--border)",
+                        background: "transparent",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = "var(--surface)";
+                        e.currentTarget.style.color = "var(--text)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.color = "var(--text-muted)";
+                      }}
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </div>
               </div>
 
               {/* Image side */}

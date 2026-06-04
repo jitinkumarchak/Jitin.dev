@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Marquee from "./components/Marquee";
 import Work from "./components/Work";
+import ProfessionalExperience from "./components/ProfessionalExperience";
+import GitHubShowcase from "./components/GitHub";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Education from "./components/Education";
@@ -51,6 +53,8 @@ export default function App() {
         <Hero />
         <Marquee />
         <Work />
+        <ProfessionalExperience />
+        <GitHubShowcase />
         <Experience />
         <Skills />
         <Education />
