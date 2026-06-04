@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import profile from "../assets/profile.png";
-import resumePdf from "../assets/Jitin_Kumar_Chak_Resume.pdf";
+import resumePdf from "../assets/Jitin_kumar_chak_Resume.pdf";
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 
 const M = { div: motion.div, h1: motion.h1, p: motion.p, span: motion.span };
